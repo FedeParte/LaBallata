@@ -20,8 +20,9 @@ app.get("/", (req, res, next) => {
     res.json({"message":"Ok"})
 });
 
-require("./endpoints/tasks.js")(app,connpool);
-require("./endpoints/Locale.js")(app,connpool);
+require("./endpoints/tasks.js")(app,connpool)
+require("./endpoints/Locale.js")(app,connpool)
+require("./endpoints/Eventi.js")(app,connpool)
 // Insert here other API endpoints
 
 // Default response for any other request
