@@ -38,7 +38,7 @@ function endpoint(app, connpool) {
 
 
 
-    app.get("/api/Locale", (req, res, next) => {
+    app.get("/api/Locali", (req, res, next) => {
         var sql = "select * from Locale"
         var params = []
         connpool.query(sql, params, (err, rows) => {
@@ -54,8 +54,8 @@ function endpoint(app, connpool) {
     });
 
 
-    app.get("/api/Locale/:id", (req, res) => {
-        var sql = "select * from Locale where Locale_id = ?"
+    app.get("/api/Locali/:id", (req, res) => {
+        var sql = "select * from Locale where idLocale = ?"
         var params = [req.params.id]
         connpool.query(sql, params, (err, rows) => {
             if (err) {
@@ -70,7 +70,7 @@ function endpoint(app, connpool) {
     });
 
 
-    app.put("/api/Locale/:id", (req, res) => {
+    app.put("/api/Locali/:id", (req, res) => {
         var data = {
             description: req.body.description,
             status: req.body.status,
@@ -79,7 +79,7 @@ function endpoint(app, connpool) {
             `UPDATE Locale set 
                description = COALESCE(?,description), 
                status = COALESCE(?,status) 
-               WHERE Locale_id = ?`,
+               WHERE idLocale = ?`,
             [data.description, data.status, req.params.id],
             function (err, result) {
                 if (err){
@@ -97,9 +97,9 @@ function endpoint(app, connpool) {
 
 
 
-    app.delete("/api/Locale/:id", (req, res) => {
+    app.delete("/api/Locali/:id", (req, res) => {
         connpool.execute(
-            'DELETE FROM Locale WHERE Locale_id = ?',
+            'DELETE FROM Locale WHERE idLocale = ?',
             [req.params.id],
             function (err, result) {
                 if (err){
