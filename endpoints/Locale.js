@@ -1,6 +1,6 @@
 function endpoint(app, connpool) {
 
-    app.post("/api/Locale", (req, res) => {
+    app.post("/api/Locali", (req, res) => {
         var errors = []
         /* controllo dati inseriti
         if (!req.body.description) {
@@ -19,7 +19,7 @@ function endpoint(app, connpool) {
             status: req.body.status,
         }
 
-        var sql = 'INSERT INTO Locale (description, status) VALUES (?,?)'
+        var sql = 'INSERT INTO Locale (idLocale, nome, citta) VALUES (?,?)'
         var params = [data.description, data.status]
         connpool.query(sql, params, (error, results) => {
             if (error) {
