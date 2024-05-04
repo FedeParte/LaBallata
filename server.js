@@ -22,7 +22,7 @@ app.get("/", (req, res, next) => {
 
 require("./endpoints/tasks.js")(app,connpool)
 require("./endpoints/Locale.js")(app,connpool)
-require("./endpoints/Eventi.js")(app,connpool)
+require("./endpoints/Evento.js")(app,connpool)
 require("./endpoints/utenti.js")(app, connpool)
 // Insert here other API endpoints
 
