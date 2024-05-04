@@ -64,15 +64,17 @@ function endpoint(app, connpool) {
 
     app.put("/api/Evento/:id", (req, res) => {
         var data = {
-            description: req.body.description,
-            status: req.body.status,
+            nomeEvento: req.body.nomeEvento,
+            costo: req.body.costo,
+            idLocale: req.body.idLocale,
         }
         connpool.execute(
             `UPDATE Evento set 
-               description = COALESCE(?,description), 
-               status = COALESCE(?,status) 
+               nomeEvento = COALESCE(?,nomeEvento), 
+               costo = COALESCE(?,costo),
+               idLocale = COALESCE(?,idLocale) 
                WHERE idEvento = ?`,
-            [data.description, data.status, req.params.id],
+            [data.nomeEvento, data.costo,data.idLocale, req.params.id],
             function (err, result) {
                 if (err){
                     res.status(400).json({"error": err.message})
