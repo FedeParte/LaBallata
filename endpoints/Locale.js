@@ -61,15 +61,15 @@ function endpoint(app, connpool) {
 
     app.put("/api/Locale/:id", (req, res) => {
         var data = {
-            description: req.body.description,
-            status: req.body.status,
+            nome: req.body.nome,
+            citta: req.body.citta,
         }
         connpool.execute(
             `UPDATE Locale set 
-               description = COALESCE(?,description), 
-               status = COALESCE(?,status) 
+               nome = COALESCE(?,nome), 
+               citta = COALESCE(?,citta) 
                WHERE idLocale = ?`,
-            [data.description, data.status, req.params.id],
+            [data.nome, data.citta, req.params.id],
             function (err, result) {
                 if (err){
                     res.status(400).json({"error": err.message})
