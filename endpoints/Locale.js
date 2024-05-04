@@ -20,7 +20,7 @@ function endpoint(app, connpool) {
         }
 
         var sql = 'INSERT INTO Locale (idLocale, nome, citta) VALUES (?,?)'
-        var params = [data.description, data.status]
+        var params = [data.idLocale, data.nome, data.citta]
         connpool.query(sql, params, (error, results) => {
             if (error) {
                 res.status(400).json({ "error": error.message })
@@ -97,7 +97,7 @@ function endpoint(app, connpool) {
 
 
 
-    app.delete("/api/Locali/:id", (req, res) => {
+    app.delete("/api/Locale/:id", (req, res) => {
         connpool.execute(
             'DELETE FROM Locale WHERE idLocale = ?',
             [req.params.id],
