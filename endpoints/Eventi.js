@@ -97,9 +97,9 @@ function endpoint(app, connpool) {
 
 
 
-    app.delete("/api/Locale/:id", (req, res) => {
+    app.delete("/api/Locali/:id", (req, res) => {
         connpool.execute(
-            'DELETE FROM Locale WHERE Locale_id = ?',
+            'DELETE FROM Evento WHERE idEvento = ?',
             [req.params.id],
             function (err, result) {
                 if (err){
