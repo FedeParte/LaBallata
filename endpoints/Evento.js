@@ -74,7 +74,7 @@ function endpoint(app, connpool) {
                costo = COALESCE(?,costo),
                idLocale = COALESCE(?,idLocale) 
                WHERE idEvento = ?`,
-            [data.nomeEvento, data.costo,data.idLocale, req.params.id],
+            [data.nomeEvento, data.costo, data.idLocale, req.params.id],
             function (err, result) {
                 if (err){
                     res.status(400).json({"error": err.message})
