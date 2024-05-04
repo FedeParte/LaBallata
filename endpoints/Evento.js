@@ -1,26 +1,18 @@
 function endpoint(app, connpool) {
 
-    app.post("/api/Locali", (req, res) => {
+    app.post("/api/Evento", (req, res) => {
         var errors = []
-        /* controllo dati inseriti
-        if (!req.body.description) {
-            errors.push("No description specified");
-        }
-        if (req.body.status === "") {
-            errors.push("No status specified");
-        }
-        */
-        if (errors.length) {
-            res.status(400).json({ "error": errors.join(",") });
-            return;
-        }
+         
         var data = {
-            description: req.body.description,
-            status: req.body.status,
+            nomeEvento: req.body.nomeEvento,
+            costo: req.body.costo,
+            idLocale: req.body.idLocale
+
+
         }
 
-        var sql = 'INSERT INTO Evento (idEvento, nomeEvento, costo) VALUES (?,?)'
-        var params = [data.idEvento, data.nomeEvento, data.costo]
+        var sql = 'INSERT INTO Evento (nomeEvento, costo, idLocale) VALUES (?,?,?)'
+        var params = [data.nomeEvento, data.costo, data.idLocale ]
         connpool.query(sql, params, (error, results) => {
             if (error) {
                 res.status(400).json({ "error": error.message })
@@ -38,7 +30,7 @@ function endpoint(app, connpool) {
 
 
 
-    app.get("/api/Locali", (req, res, next) => {
+    app.get("/api/Evento", (req, res, next) => {
         var sql = "select * from Evento"
         var params = []
         connpool.query(sql, params, (err, rows) => {
@@ -54,7 +46,7 @@ function endpoint(app, connpool) {
     });
 
 
-    app.get("/api/Locali/:id", (req, res) => {
+    app.get("/api/Evento/:id", (req, res) => {
         var sql = "select * from Evento where idEvento = ?"
         var params = [req.params.id]
         connpool.query(sql, params, (err, rows) => {
@@ -70,7 +62,7 @@ function endpoint(app, connpool) {
     });
 
 
-    app.put("/api/Locali/:id", (req, res) => {
+    app.put("/api/Evento/:id", (req, res) => {
         var data = {
             description: req.body.description,
             status: req.body.status,
@@ -97,7 +89,7 @@ function endpoint(app, connpool) {
 
 
 
-    app.delete("/api/Locali/:id", (req, res) => {
+    app.delete("/api/Evento/:id", (req, res) => {
         connpool.execute(
             'DELETE FROM Evento WHERE idEvento = ?',
             [req.params.id],
